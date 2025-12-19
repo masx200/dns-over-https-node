@@ -4,15 +4,15 @@ module.exports = {
     commonjs: true,
     es6: true,
   },
-  extends: 'eslint:recommended',
+  extends: "eslint:recommended",
   parserOptions: {
     ecmaVersion: 2018,
   },
   rules: {
-    indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
-    indent: ['error', 2, { SwitchCase: 1 }],
+    indent: ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    quotes: ["error", "single"],
+    semi: ["error", "always"],
+    indent: ["error", 2, { SwitchCase: 1 }],
   },
 };

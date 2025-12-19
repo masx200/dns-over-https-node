@@ -1,23 +1,21 @@
-# DNS-over-HTTPS API for Node.js
+# Node.js DNS-over-HTTPS API
 
-[`@masx200/dns-over-https-node`](https://www.npmjs.com/package/@masx200/dns-over-https-node)
-is an RFC-8484 compliant Node.js
-[DNS over HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) API.
+[`@masx200/dns-over-https-node`](https://www.npmjs.com/package/@masx200/dns-over-https-node) 是一个符合 RFC-8484 标准的 Node.js [DNS over HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) API。
 
 [![CircleCI](https://circleci.com/gh/sagi/dns-over-https-node.svg?style=svg)](https://circleci.com/gh/sagi/dns-over-https-node)
 [![Coverage Status](https://coveralls.io/repos/github/sagi/dns-over-https-node/badge.svg?branch=master)](https://coveralls.io/github/sagi/dns-over-https-node?branch=master)
 [![MIT License](https://img.shields.io/npm/l/@masx200/dns-over-https-node.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![version](https://img.shields.io/npm/v/@masx200/dns-over-https-node.svg?style=flat-square)](http://npm.im/@masx200/dns-over-https-node)
 
-## Installation
+## 安装
 
-```
+```bash
 $ npm install --save @masx200/dns-over-https-node
 ```
 
 ## API
 
-We import as follows:
+我们按以下方式导入：
 
 ```js
 const doh = require("@masx200/dns-over-https-node");
@@ -39,22 +37,22 @@ doh.query = {
 };
 ```
 
-A `name` is mandatory. You can set your own `method`, `hostname`, `path`,
-`port`, `userAgent`, `type`, `klass` and `useHttps`.
+`name` 参数是必需的。您可以设置自己的 `method`、`hostname`、`path`、`port`、`userAgent`、`type`、`klass` 和 `useHttps`。
 
-A `Promise` that resolves to a `DNS` response object is returned.
+返回一个解析为 `DNS` 响应对象的 `Promise`。
 
-For instance,
+例如：
 
 ```js
-const doh = require("@masx200/dns-over-https-node")(async () => {
+const doh = require("@masx200/dns-over-https-node");
+(async () => {
   const dnsResponse = await doh.query({ name: "sagi.io" });
 })();
 ```
 
-Results in:
+结果：
 
-```
+```json
 {
   "id": 0,
   "type": "response",
@@ -99,9 +97,8 @@ Results in:
 }
 ```
 
-More usage examples can be found in
-[`example`](https://github.com/masx200/dns-over-https-node/blob/master/example/index.js).
+更多使用示例可以在 [`example`](https://github.com/masx200/dns-over-https-node/blob/master/example/index.js) 中找到。
 
-## License
+## 许可证
 
 MIT

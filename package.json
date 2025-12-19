@@ -1,5 +1,6 @@
 {
-  "name": "@sagi.io/dns-over-https",
+  "type": "module",
+  "name": "@masx200/dns-over-https-node",
   "version": "0.0.2",
   "description": "RFC-8484 Compliant DNS-over-HTTPS API",
   "main": "index.js",
@@ -13,8 +14,10 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
+    "@types/node": "^25.0.3",
     "base64url": "^3.0.1",
-    "dns-packet": "^5.2.1"
+    "dns-packet": "^5.2.1",
+    "undici": "^7.16.0"
   },
   "devDependencies": {
     "coveralls": "^3.1.0",
@@ -25,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sagi/dns-over-https-node.git"
+    "url": "https://github.com/masx200/dns-over-https-node.git"
   },
   "keywords": [
     "dns-over-https",

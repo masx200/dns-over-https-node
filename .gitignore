@@ -2,3 +2,5 @@ node_modules
 coverage
 *.swp
 yarn-error.log
+.claude/settings.local.json
+server.log
