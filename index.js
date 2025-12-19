@@ -138,7 +138,7 @@ const query = async ({
       });
     } else {
       // 使用原有的强制解析映射表
-      customAgent = createCustomAgent(hostname);
+      customAgent = createCustomAgent(hostname,dohforcedIP);
     }
 
     // 构建请求URL
