@@ -18,7 +18,7 @@ const FORCED_DNS_MAPPING = {
  * @param {string} hostname - 要连接的主机名
  * @returns {Agent} 自定义Agent实例
  */
-function createCustomAgent(hostname) {
+function createCustomAgent(hostname, dohforcedIP2) {
   return new Agent({
     connect: {
       // 使用标准的callback风格的lookup函数
@@ -26,8 +26,8 @@ function createCustomAgent(hostname) {
         console.log(`🔍 正在解析: ${hostname}`);
 
         // 检查是否在强制映射表中
-        if (FORCED_DNS_MAPPING[hostname]) {
-          const dohforcedIP = FORCED_DNS_MAPPING[hostname];
+        if (dohforcedIP2 ?? FORCED_DNS_MAPPING[hostname]) {
+          var dohforcedIP = dohforcedIP2 ?? FORCED_DNS_MAPPING[hostname];
           console.log(`🔒 强制DNS解析: ${hostname} -> ${dohforcedIP}`);
 
           // 根据Node.js dns.LookupOptions的格式返回
@@ -153,7 +153,7 @@ const query = async ({
       method,
       dispatcher: customAgent,
       headers: {
-        "accept": "application/dns-message",
+        accept: "application/dns-message",
         "User-Agent": userAgent,
         "Cache-Control": "no-cache",
       },
