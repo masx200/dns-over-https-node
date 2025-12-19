@@ -4,8 +4,8 @@
 is an RFC-8484 compliant Node.js
 [DNS over HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) API.
 
-[![CircleCI](https://circleci.com/gh/sagi/dns-over-https-node.svg?style=svg)](https://circleci.com/gh/sagi/dns-over-https-node)
-[![Coverage Status](https://coveralls.io/repos/github/sagi/dns-over-https-node/badge.svg?branch=master)](https://coveralls.io/github/sagi/dns-over-https-node?branch=master)
+[![CircleCI](https://circleci.com/gh/masx200/dns-over-https-node.svg?style=svg)](https://circleci.com/gh/masx200/dns-over-https-node)
+[![Coverage Status](https://coveralls.io/repos/github/masx200/dns-over-https-node/badge.svg?branch=master)](https://coveralls.io/github/masx200/dns-over-https-node?branch=master)
 [![MIT License](https://img.shields.io/npm/l/@masx200/dns-over-https-node.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![version](https://img.shields.io/npm/v/@masx200/dns-over-https-node.svg?style=flat-square)](http://npm.im/@masx200/dns-over-https-node)
 
@@ -48,7 +48,7 @@ For instance,
 
 ```js
 const doh = require("@masx200/dns-over-https-node")(async () => {
-  const dnsResponse = await doh.query({ name: "sagi.io" });
+  const dnsResponse = await doh.query({ name: "dns.google" });
 })();
 ```
 
@@ -71,14 +71,14 @@ Results in:
   "rcode": "NOERROR",
   "questions": [
     {
-      "name": "sagi.io",
+      "name": "dns.google",
       "type": "A",
       "class": "IN"
     }
   ],
   "answers": [
     {
-      "name": "sagi.io",
+      "name": "dns.google",
       "type": "A",
       "ttl": 300,
       "class": "IN",
@@ -86,7 +86,7 @@ Results in:
       "data": "151.101.1.195"
     },
     {
-      "name": "sagi.io",
+      "name": "dns.google",
       "type": "A",
       "ttl": 300,
       "class": "IN",

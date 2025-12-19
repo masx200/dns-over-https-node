@@ -27,15 +27,15 @@ function createCustomAgent(hostname) {
 
         // 检查是否在强制映射表中
         if (FORCED_DNS_MAPPING[hostname]) {
-          const forcedIP = FORCED_DNS_MAPPING[hostname];
-          console.log(`🔒 强制DNS解析: ${hostname} -> ${forcedIP}`);
+          const dohforcedIP = FORCED_DNS_MAPPING[hostname];
+          console.log(`🔒 强制DNS解析: ${hostname} -> ${dohforcedIP}`);
 
           // 根据Node.js dns.LookupOptions的格式返回
           // 可以返回单个地址或地址数组
           if (options && options.all) {
-            return callback(null, [{ address: forcedIP, family: 4 }]);
+            return callback(null, [{ address: dohforcedIP, family: 4 }]);
           } else {
-            return callback(null, forcedIP, 4);
+            return callback(null, dohforcedIP, 4);
           }
         }
 
@@ -100,7 +100,7 @@ const query = async ({
   type = "A",
   klass = "IN",
   useHttps = true,
-  forcedIP, // 新增：强制解析的IP地址参数
+  dohforcedIP, // 新增：强制解析的IP地址参数
 }) => {
   try {
     let customAgent;
@@ -108,8 +108,8 @@ const query = async ({
     let targetPort = port;
 
     // 检查是否传入了强制解析的IP地址
-    if (forcedIP) {
-      console.log(`🎯 使用传入的强制IP: ${hostname} -> ${forcedIP}`);
+    if (dohforcedIP) {
+      console.log(`🎯 使用传入的强制IP: ${hostname} -> ${dohforcedIP}`);
 
       // 创建一个特殊的Agent，只对当前hostname强制解析
       customAgent = new Agent({
@@ -119,13 +119,15 @@ const query = async ({
 
             // 如果是要强制解析的hostname，返回传入的IP
             if (lookupHostname === hostname) {
-              console.log(`🔒 强制DNS解析: ${lookupHostname} -> ${forcedIP}`);
+              console.log(
+                `🔒 强制DNS解析: ${lookupHostname} -> ${dohforcedIP}`,
+              );
 
               // 根据Node.js dns.LookupOptions的格式返回
               if (options && options.all) {
-                return callback(null, [{ address: forcedIP, family: 4 }]);
+                return callback(null, [{ address: dohforcedIP, family: 4 }]);
               } else {
-                return callback(null, forcedIP, 4);
+                return callback(null, dohforcedIP, 4);
               }
             }
 
@@ -161,8 +163,8 @@ const query = async ({
     console.log(`🔧 目标DNS解析器: ${hostname}`);
 
     // 显示强制解析信息
-    if (forcedIP) {
-      console.log(`🎯 传入强制IP: ${hostname} -> ${forcedIP}`);
+    if (dohforcedIP) {
+      console.log(`🎯 传入强制IP: ${hostname} -> ${dohforcedIP}`);
     } else if (FORCED_DNS_MAPPING[hostname]) {
       console.log(
         `🎯 映射表强制IP: ${hostname} -> ${FORCED_DNS_MAPPING[hostname]}`,

@@ -1,9 +1,11 @@
 # Node.js DNS-over-HTTPS API
 
-[`@masx200/dns-over-https-node`](https://www.npmjs.com/package/@masx200/dns-over-https-node) 是一个符合 RFC-8484 标准的 Node.js [DNS over HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) API。
+[`@masx200/dns-over-https-node`](https://www.npmjs.com/package/@masx200/dns-over-https-node)
+是一个符合 RFC-8484 标准的 Node.js
+[DNS over HTTPS](https://en.wikipedia.org/wiki/DNS_over_HTTPS) API。
 
-[![CircleCI](https://circleci.com/gh/sagi/dns-over-https-node.svg?style=svg)](https://circleci.com/gh/sagi/dns-over-https-node)
-[![Coverage Status](https://coveralls.io/repos/github/sagi/dns-over-https-node/badge.svg?branch=master)](https://coveralls.io/github/sagi/dns-over-https-node?branch=master)
+[![CircleCI](https://circleci.com/gh/masx200/dns-over-https-node.svg?style=svg)](https://circleci.com/gh/masx200/dns-over-https-node)
+[![Coverage Status](https://coveralls.io/repos/github/masx200/dns-over-https-node/badge.svg?branch=master)](https://coveralls.io/github/masx200/dns-over-https-node?branch=master)
 [![MIT License](https://img.shields.io/npm/l/@masx200/dns-over-https-node.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 [![version](https://img.shields.io/npm/v/@masx200/dns-over-https-node.svg?style=flat-square)](http://npm.im/@masx200/dns-over-https-node)
 
@@ -37,7 +39,9 @@ doh.query = {
 };
 ```
 
-`name` 参数是必需的。您可以设置自己的 `method`、`hostname`、`path`、`port`、`userAgent`、`type`、`klass` 和 `useHttps`。
+`name` 参数是必需的。您可以设置自己的
+`method`、`hostname`、`path`、`port`、`userAgent`、`type`、`klass` 和
+`useHttps`。
 
 返回一个解析为 `DNS` 响应对象的 `Promise`。
 
@@ -46,7 +50,7 @@ doh.query = {
 ```js
 const doh = require("@masx200/dns-over-https-node");
 (async () => {
-  const dnsResponse = await doh.query({ name: "sagi.io" });
+  const dnsResponse = await doh.query({ name: "dns.google" });
 })();
 ```
 
@@ -69,14 +73,14 @@ const doh = require("@masx200/dns-over-https-node");
   "rcode": "NOERROR",
   "questions": [
     {
-      "name": "sagi.io",
+      "name": "dns.google",
       "type": "A",
       "class": "IN"
     }
   ],
   "answers": [
     {
-      "name": "sagi.io",
+      "name": "dns.google",
       "type": "A",
       "ttl": 300,
       "class": "IN",
@@ -84,7 +88,7 @@ const doh = require("@masx200/dns-over-https-node");
       "data": "151.101.1.195"
     },
     {
-      "name": "sagi.io",
+      "name": "dns.google",
       "type": "A",
       "ttl": 300,
       "class": "IN",
@@ -97,7 +101,9 @@ const doh = require("@masx200/dns-over-https-node");
 }
 ```
 
-更多使用示例可以在 [`example`](https://github.com/masx200/dns-over-https-node/blob/master/example/index.js) 中找到。
+更多使用示例可以在
+[`example`](https://github.com/masx200/dns-over-https-node/blob/master/example/index.js)
+中找到。
 
 ## 许可证
 

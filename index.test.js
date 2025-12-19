@@ -9,7 +9,7 @@ describe("doh tests", () => {
   test("getDnsQuery", () => {
     const id = 0;
     const klass = "IN";
-    const name = "sagi.io";
+    const name = "dns.google";
     const type = "A";
     const expected = {
       type: "query",
@@ -28,7 +28,7 @@ describe("doh tests", () => {
 
   test("getDnsWireformat", () => {
     const klass = "IN";
-    const name = "sagi.io";
+    const name = "dns.google";
     const type = "A";
     const expectedB64 = "AAABAAABAAAAAAAABHNhZ2kCaW8AAAEAAQ==";
     expect(
@@ -38,7 +38,7 @@ describe("doh tests", () => {
 
   test("getOptions", () => {
     const klass = "IN";
-    const name = "sagi.io";
+    const name = "dns.google";
     const type = "A";
     const hostname = "dns.google.com";
     const path = "/experimental";
@@ -106,7 +106,7 @@ describe("doh tests", () => {
     const path = "/experimental";
     const port = 443;
     const userAgent = "Nietzsche";
-    const name = "sagi.io";
+    const name = "dns.google";
     const type = "A";
     const klass = "IN";
 
@@ -141,7 +141,7 @@ describe("doh tests", () => {
     const path = "/experimental";
     const port = 443;
     const userAgent = "Nietzsche";
-    const name = "sagi.io";
+    const name = "dns.google";
     const type = "A";
     const klass = "IN";
     const useHttps = false;
@@ -189,7 +189,7 @@ describe("doh tests", () => {
     const path = "/experimental";
     const port = 443;
     const userAgent = "Nietzsche";
-    const name = "sagi.io";
+    const name = "dns.google";
     const type = "A";
     const klass = "IN";
     const useHttps = false;
@@ -227,7 +227,7 @@ describe("doh tests", () => {
   test("query, http, post, unknown statusCode error", async () => {
     const http = require("http");
     const dnsPacket = require("dns-packet");
-    const name = "sagi.io";
+    const name = "dns.google";
     const useHttps = false;
 
     const req = new EventEmitter();

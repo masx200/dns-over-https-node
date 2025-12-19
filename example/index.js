@@ -2,16 +2,16 @@ import { query } from "../index.js";
 
 (async () => {
   try {
-    const r1 = await query({ name: "sagi.io" });
+    const r1 = await query({ name: "dns.google" });
     console.log("r1 (A record):", JSON.stringify(r1, null, 2));
 
-    const r2 = await query({ name: "sagi.io", type: "TXT" });
+    const r2 = await query({ name: "dns.google", type: "TXT" });
     console.log("r2 (TXT record):", JSON.stringify(r2, null, 2));
 
-    const r3 = await query({ name: "sagi.io", method: "GET" });
+    const r3 = await query({ name: "dns.google", method: "GET" });
     console.log("r3 (GET method):", JSON.stringify(r3, null, 2));
 
-    const r4 = await query({ name: "sagi.io", method: "GET", type: "AAAA" });
+    const r4 = await query({ name: "dns.google", method: "GET", type: "AAAA" });
     console.log("r4 (AAAA record with GET):", JSON.stringify(r4, null, 2));
 
     const r5 = await query({
@@ -23,7 +23,7 @@ import { query } from "../index.js";
     console.log("r5 (CHAOS class):", JSON.stringify(r5, null, 2));
 
     const r6 = await query({
-      name: "sagi.io",
+      name: "dns.google",
       method: "GET",
       type: "AAAA",
       hostname: "dns.google.com",

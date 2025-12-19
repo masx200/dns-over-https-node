@@ -2,7 +2,9 @@
 
 ## 概述
 
-本库支持对特定的 DNS-over-HTTPS (DoH) 服务器进行强制 DNS 解析，允许您将指定的域名强制解析到预设的 IP 地址。这对于网络代理、CDN 加速、访问控制等场景非常有用。
+本库支持对特定的 DNS-over-HTTPS (DoH) 服务器进行强制 DNS
+解析，允许您将指定的域名强制解析到预设的 IP 地址。这对于网络代理、CDN
+加速、访问控制等场景非常有用。
 
 ## 功能特性
 
@@ -51,50 +53,49 @@ const FORCED_DNS_MAPPING = {
 ### 基本用法
 
 ```javascript
-import { query } from '@masx200/dns-over-https-node';
+import { query } from "@masx200/dns-over-https-node";
 
 // 使用强制解析的 DoH 服务器
 const result = await query({
-  name: 'google.com',
-  hostname: 'deno-dns-over-https-server.g18uibxgnb.de5.net',
-  path: '/dns-query',
-  method: 'GET',
-  type: 'A',
+  name: "google.com",
+  hostname: "deno-dns-over-https-server.g18uibxgnb.de5.net",
+  path: "/dns-query",
+  method: "GET",
+  type: "A",
 });
 
-console.log('DNS 查询结果:', result);
+console.log("DNS 查询结果:", result);
 ```
 
 ### 完整示例
 
 ```javascript
-import { query } from '@masx200/dns-over-https-node';
+import { query } from "@masx200/dns-over-https-node";
 
 (async () => {
   try {
     // 测试强制 DNS 解析
-    console.log('=== 测试强制 DNS 解析功能 ===');
+    console.log("=== 测试强制 DNS 解析功能 ===");
 
     // 1. 使用标准 DoH 服务器
     const normalResult = await query({
-      name: 'baidu.com',
-      hostname: 'cloudflare-dns.com',
-      path: '/dns-query',
-      method: 'GET',
+      name: "baidu.com",
+      hostname: "cloudflare-dns.com",
+      path: "/dns-query",
+      method: "GET",
     });
-    console.log('标准 DoH 结果:', normalResult.answers);
+    console.log("标准 DoH 结果:", normalResult.answers);
 
     // 2. 使用强制解析的 DoH 服务器
     const forcedResult = await query({
-      name: 'baidu.com',
-      hostname: 'deno-dns-over-https-server.g18uibxgnb.de5.net',
-      path: '/',
-      method: 'GET',
+      name: "baidu.com",
+      hostname: "deno-dns-over-https-server.g18uibxgnb.de5.net",
+      path: "/",
+      method: "GET",
     });
-    console.log('强制解析 DoH 结果:', forcedResult.answers);
-
+    console.log("强制解析 DoH 结果:", forcedResult.answers);
   } catch (error) {
-    console.error('查询失败:', error.message);
+    console.error("查询失败:", error.message);
   }
 })();
 ```
@@ -112,11 +113,11 @@ function createCustomAgent(hostname) {
 
         // 检查是否在强制映射表中
         if (FORCED_DNS_MAPPING[hostname]) {
-          const forcedIP = FORCED_DNS_MAPPING[hostname];
-          console.log(`🔒 强制DNS解析: ${hostname} -> ${forcedIP}`);
+          const dohforcedIP = FORCED_DNS_MAPPING[hostname];
+          console.log(`🔒 强制DNS解析: ${hostname} -> ${dohforcedIP}`);
 
           // 返回强制解析的 IP
-          return callback(null, forcedIP, 4);
+          return callback(null, dohforcedIP, 4);
         }
 
         // 对于其他域名，使用标准DNS解析
@@ -192,7 +193,7 @@ undici Agent 自动处理连接复用，提高性能：
 
 ```javascript
 // 自动复用到同一强制解析 IP 的连接
-const agent = createCustomAgent('doh-server.example.com');
+const agent = createCustomAgent("doh-server.example.com");
 ```
 
 ### 2. 缓存策略
@@ -231,9 +232,9 @@ async function cachedQuery(options) {
 建议只信任可信的 IP 地址：
 
 ```javascript
-const TRUSTED_IPS = ['104.21.9.230', '192.168.1.100'];
+const TRUSTED_IPS = ["104.21.9.230", "192.168.1.100"];
 
-function validateForcedIP(hostname, ip) {
+function validatedohforcedIP(hostname, ip) {
   if (!TRUSTED_IPS.includes(ip)) {
     throw new Error(`不受信任的 IP 地址: ${ip} 用于域名: ${hostname}`);
   }
@@ -245,16 +246,19 @@ function validateForcedIP(hostname, ip) {
 ### 1. 常见问题
 
 **问题：强制解析不生效**
+
 ```
 解决方案：检查 FORCED_DNS_MAPPING 中是否包含目标域名
 ```
 
 **问题：连接超时**
+
 ```
 解决方案：验证强制解析的 IP 地址是否可达
 ```
 
 **问题：证书错误**
+
 ```
 解决方案：确保服务器支持 SNI 或使用正确的 IP 地址
 ```
@@ -265,19 +269,19 @@ function validateForcedIP(hostname, ip) {
 
 ```javascript
 // 在 createCustomAgent 中添加更多调试信息
-lookup: (hostname, options, callback) => {
+lookup: ((hostname, options, callback) => {
   console.log(`🔍 [DEBUG] 解析域名: ${hostname}`);
   console.log(`🔍 [DEBUG] 强制映射表:`, FORCED_DNS_MAPPING);
 
   if (FORCED_DNS_MAPPING[hostname]) {
-    const forcedIP = FORCED_DNS_MAPPING[hostname];
-    console.log(`🔒 [DEBUG] 应用强制解析: ${hostname} -> ${forcedIP}`);
-    return callback(null, forcedIP, 4);
+    const dohforcedIP = FORCED_DNS_MAPPING[hostname];
+    console.log(`🔒 [DEBUG] 应用强制解析: ${hostname} -> ${dohforcedIP}`);
+    return callback(null, dohforcedIP, 4);
   }
 
   console.log(`🔍 [DEBUG] 使用标准解析: ${hostname}`);
   lookup(hostname, options, callback);
-}
+});
 ```
 
 ## 最佳实践
@@ -290,4 +294,5 @@ lookup: (hostname, options, callback) => {
 
 ## 总结
 
-强制 DNS 解析功能为 DoH 客户端提供了强大的网络路由和控制能力，适用于各种复杂的网络环境。通过合理配置和使用，可以显著提升网络性能和可靠性。
+强制 DNS 解析功能为 DoH
+客户端提供了强大的网络路由和控制能力，适用于各种复杂的网络环境。通过合理配置和使用，可以显著提升网络性能和可靠性。

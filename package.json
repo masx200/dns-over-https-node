@@ -4,7 +4,7 @@
   "version": "0.0.2",
   "description": "RFC-8484 Compliant DNS-over-HTTPS API",
   "main": "index.js",
-  "author": "Sagi Kedmi <git@sagi.io> (https://sagi.io)",
+  "author": "masx200 Kedmi <git@dns.google> (https://dns.google)",
   "license": "MIT",
   "scripts": {
     "start": "node example/index.js",

@@ -4,7 +4,7 @@ import { query } from "./index.js";
   console.log("=== 简单测试强制IP功能 ===");
 
   try {
-    console.log("\n🔹 测试传入 forcedIP 参数");
+    console.log("\n🔹 测试传入 dohforcedIP  参数");
 
     // 测试1: 使用传入的强制IP
     const result1 = await query({
@@ -13,7 +13,7 @@ import { query } from "./index.js";
       path: "/",
       method: "GET",
       type: "A",
-      forcedIP: "104.21.9.230"
+      dohforcedIP: "104.21.9.230",
     });
 
     console.log("✅ 强制IP测试成功!");
@@ -26,14 +26,13 @@ import { query } from "./index.js";
       path: "/",
       method: "GET",
       type: "A",
-      // 不传 forcedIP，会使用映射表
+      // 不传 dohforcedIP ，会使用映射表
     });
 
     console.log("✅ 映射表测试成功!");
     console.log("taobao.com IP:", result2.answers?.[0]?.data);
 
     console.log("\n🎉 强制DNS解析功能正常工作！");
-
   } catch (error) {
     console.error("❌ 测试失败:", error.message);
   }
