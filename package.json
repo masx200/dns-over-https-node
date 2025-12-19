@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@masx200/dns-over-https-node",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "RFC-8484 Compliant DNS-over-HTTPS API",
   "main": "index.js",
   "author": "masx200 Kedmi <git@dns.google> (https://dns.google)",
