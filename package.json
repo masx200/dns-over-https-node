@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/masx200/dns-over-https-node.git"
+    "url": "git+https://github.com/masx200/dns-over-https-node.git"
   },
   "keywords": [
     "dns-over-https",
@@ -39,5 +39,12 @@
     "doh",
     "security",
     "privacy"
-  ]
+  ],
+  "directories": {
+    "example": "example"
+  },
+  "bugs": {
+    "url": "https://github.com/masx200/dns-over-https-node/issues"
+  },
+  "homepage": "https://github.com/masx200/dns-over-https-node#readme"
 }
