@@ -100,14 +100,48 @@ const query = async ({
   type = "A",
   klass = "IN",
   useHttps = true,
+  forcedIP, // 新增：强制解析的IP地址参数
 }) => {
   try {
-    // 创建自定义Agent用于强制DNS解析
-    const customAgent = createCustomAgent(hostname);
+    let customAgent;
+    let targetHostname = hostname;
+    let targetPort = port;
+
+    // 检查是否传入了强制解析的IP地址
+    if (forcedIP) {
+      console.log(`🎯 使用传入的强制IP: ${hostname} -> ${forcedIP}`);
+
+      // 创建一个特殊的Agent，只对当前hostname强制解析
+      customAgent = new Agent({
+        connect: {
+          lookup: (lookupHostname, options, callback) => {
+            console.log(`🔍 正在解析: ${lookupHostname}`);
+
+            // 如果是要强制解析的hostname，返回传入的IP
+            if (lookupHostname === hostname) {
+              console.log(`🔒 强制DNS解析: ${lookupHostname} -> ${forcedIP}`);
+
+              // 根据Node.js dns.LookupOptions的格式返回
+              if (options && options.all) {
+                return callback(null, [{ address: forcedIP, family: 4 }]);
+              } else {
+                return callback(null, forcedIP, 4);
+              }
+            }
+
+            // 对于其他域名，使用标准DNS解析
+            lookup(lookupHostname, options, callback);
+          },
+        },
+      });
+    } else {
+      // 使用原有的强制解析映射表
+      customAgent = createCustomAgent(hostname);
+    }
 
     // 构建请求URL
     const protocol = useHttps ? "https" : "http";
-    const url = new URL(`${protocol}://${hostname}:${port}${path}`);
+    const url = new URL(`${protocol}://${targetHostname}:${targetPort}${path}`);
 
     // 获取DNS查询的二进制数据
     const dnsWireformat = getDnsWireformat({ name, type, klass });
@@ -123,11 +157,15 @@ const query = async ({
       },
     };
 
-    console.log(`🌐 使用强制DNS解析请求: ${url.toString()}`);
+    console.log(`🌐 DNS-over-HTTPS请求: ${url.toString()}`);
     console.log(`🔧 目标DNS解析器: ${hostname}`);
-    if (FORCED_DNS_MAPPING[hostname]) {
+
+    // 显示强制解析信息
+    if (forcedIP) {
+      console.log(`🎯 传入强制IP: ${hostname} -> ${forcedIP}`);
+    } else if (FORCED_DNS_MAPPING[hostname]) {
       console.log(
-        `🎯 强制映射: ${hostname} -> ${FORCED_DNS_MAPPING[hostname]}`,
+        `🎯 映射表强制IP: ${hostname} -> ${FORCED_DNS_MAPPING[hostname]}`,
       );
     }
 
