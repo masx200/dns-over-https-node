@@ -7,7 +7,7 @@
   "author": "masx200 Kedmi <git@dns.google> (https://dns.google)",
   "license": "MIT",
   "scripts": {
-    "test:dohforcedIP":"node test-simple-forced.js",
+    "test:dohforcedIP": "node test-simple-forced.js",
     "start": "node example/index.js",
     "prettier:check": "prettier --list-different index.js",
     "eslint": "eslint index.js",
@@ -47,5 +47,10 @@
   "bugs": {
     "url": "https://github.com/masx200/dns-over-https-node/issues"
   },
-  "homepage": "https://github.com/masx200/dns-over-https-node#readme"
+  "homepage": "https://github.com/masx200/dns-over-https-node#readme",
+  "pnpm": {
+    "overrides": {
+      "fast-uri": ">=3.1.2"
+    }
+  }
 }
